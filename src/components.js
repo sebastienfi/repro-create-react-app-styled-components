@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import ImageWithPromise from 'react-image-promise/dist'
 
-export const MyComponentAsFunction = () => <div>This should be red.</div>
+export const MyComponentAsFunction = ({children, ...rest}) => <div {...rest}>This should be red.</div>
 
 export const MyStyledComponent = styled(MyComponentAsFunction)`
     background-color:red;
@@ -16,7 +16,7 @@ export const MyStyledDiv = styled.div`
     width:200px;
 `
 
-export const MyImageAsync = props => {
+export const MyImageAsync = ({src, ...rest}) => {
     
     /*
     // To simulate a longer loading delay:
@@ -27,9 +27,10 @@ export const MyImageAsync = props => {
   
     return (
       <ImageWithPromise       
-        src={new Promise(resolve => {setTimeout(() => resolve(props.src), 3000);})}
+        src={new Promise(resolve => {setTimeout(() => resolve(src), 3000);})}
         loadingPlaceholder={<div>loading...</div>}
         onError={console.log}
+        {...rest}
       />
     )
   }
